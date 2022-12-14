@@ -12,11 +12,6 @@ public class CuidadoExtraInputToModelImpl implements CuidadoExtraInputToModel {
         CuidadoExtra cuidadoExtra = new CuidadoExtra();
         cuidadoExtra.setDescripcion(originObject.getDescripcion());
 
-        Caballo caballo = new Caballo();
-        caballo.setId(originObject.getCaballoId());
-
-        cuidadoExtra.setCaballo(caballo);
-
         return cuidadoExtra;
     }
 }

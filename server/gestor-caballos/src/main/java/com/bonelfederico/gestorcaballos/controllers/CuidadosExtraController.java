@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(CuidadosExtraController.CUIDADOS_BASE_URL)
 public class CuidadosExtraController {
-    public static final String CUIDADOS_BASE_URL = "/api/v1/cuidados";
+    public static final String CUIDADOS_BASE_URL = CaballoController.CABALLOS_BASE_URL + "/{idCaballo}/cuidados";
 
     private final CuidadosExtraService cuidadosExtraService;
 
@@ -36,9 +36,10 @@ public class CuidadosExtraController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SuccessfulResponseDTO<CuidadoExtraDTO> postCuidado(@Valid @RequestBody CuidadoExtraInputDTO cuidadoExtra) {
-        log.info("Creando nuevo cuidado especial para el caballo " + cuidadoExtra.getCaballoId());
-        return new SuccessfulResponseDTO<>(cuidadosExtraService.create(cuidadoExtra));
+    public SuccessfulResponseDTO<CuidadoExtraDTO> postCuidado(@PathVariable Long idCaballo,
+                                                              @Valid @RequestBody CuidadoExtraInputDTO cuidadoExtra) {
+        log.info("Creando nuevo cuidado especial para el caballo " + idCaballo);
+        return new SuccessfulResponseDTO<>(cuidadosExtraService.create(idCaballo, cuidadoExtra));
     }
 
     /**
@@ -48,8 +49,8 @@ public class CuidadosExtraController {
      */
     @DeleteMapping("/{idCuidado}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteCuidado(@PathVariable Long idCuidado) {
+    public void deleteCuidado(@PathVariable Long idCaballo, @PathVariable Long idCuidado) {
         log.info("Eliminando cuidado especial con el id: " + idCuidado);
-        cuidadosExtraService.deleteById(idCuidado);
+        cuidadosExtraService.deleteById(idCaballo, idCuidado);
     }
 }

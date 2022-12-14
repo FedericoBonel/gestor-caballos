@@ -20,6 +20,9 @@ import java.util.Set;
 @Entity(name = "caballos")
 public class Caballo {
 
+    // Numero de cuidados maximos que se pueden asignar a un caballo
+    public static final int MAX_NUMBER_CUIDADOS = 5;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -4,6 +4,7 @@ import com.bonelfederico.gestorcaballos.converters.cuidadoextra.CuidadoExtraInpu
 import com.bonelfederico.gestorcaballos.converters.cuidadoextra.CuidadoExtraToDto;
 import com.bonelfederico.gestorcaballos.dtos.cuidadoextra.CuidadoExtraDTO;
 import com.bonelfederico.gestorcaballos.dtos.cuidadoextra.CuidadoExtraInputDTO;
+import com.bonelfederico.gestorcaballos.errors.BadRequestError;
 import com.bonelfederico.gestorcaballos.errors.NotFoundError;
 import com.bonelfederico.gestorcaballos.models.Caballo;
 import com.bonelfederico.gestorcaballos.models.CuidadoExtra;
@@ -30,10 +31,14 @@ public class CuidadosExtraServiceImpl implements CuidadosExtraService {
     }
 
     @Override
-    public CuidadoExtraDTO create(CuidadoExtraInputDTO cuidado) {
-        Caballo foundCaballo = caballosRepository.findById(cuidado.getCaballoId()).orElseThrow(() ->
-                new NotFoundError("El caballo con el siguiente identificador no fue encontrado: "
-                        + cuidado.getCaballoId()));
+    public CuidadoExtraDTO create(Long idCaballo, CuidadoExtraInputDTO cuidado) {
+        Caballo foundCaballo = caballosRepository.findById(idCaballo).orElseThrow(() ->
+                new NotFoundError("El caballo con el siguiente identificador no fue encontrado: " + idCaballo));
+
+        // Verifica que el caballo no tenga el maximo numero de cuidados posibles
+        if (Caballo.MAX_NUMBER_CUIDADOS == foundCaballo.getCuidadosExtra().size()) {
+            throw new BadRequestError("El caballo ya posee el maximo de cuidados extra que se permiten");
+        }
 
         CuidadoExtra cuidadoExtra = toModelConverter.convert(cuidado);
         cuidadoExtra.setCaballo(foundCaballo);
@@ -42,9 +47,10 @@ public class CuidadosExtraServiceImpl implements CuidadosExtraService {
     }
 
     @Override
-    public void deleteById(Long idCuidado) {
-        cuidadosExtraRepository.findById(idCuidado).orElseThrow(() ->
-                new NotFoundError("El cuidado extra con el siguiente identificador no fue encontrado: " + idCuidado));
+    public void deleteById(Long idCaballo, Long idCuidado) {
+        cuidadosExtraRepository.findByIdAndCaballoId(idCuidado, idCaballo).orElseThrow(() ->
+                new NotFoundError("El cuidado extra con el siguiente identificador no fue encontrado: " + idCuidado
+                        + " o el Caballo con el siguiente identificador no fue encontrado: " + idCaballo));
         cuidadosExtraRepository.deleteById(idCuidado);
     }
 }

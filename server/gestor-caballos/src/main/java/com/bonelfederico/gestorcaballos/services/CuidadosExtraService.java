@@ -12,15 +12,17 @@ public interface CuidadosExtraService {
     /**
      * Crea un nuevo cuidado para el caballo indicado
      *
+     * @param idCaballo Id del caballo para el cual se esta creando el cuidado
      * @param cuidado Nuevo cuidado a ser creado
      * @return El nuevo cuidado creado
      */
-    CuidadoExtraDTO create(CuidadoExtraInputDTO cuidado);
+    CuidadoExtraDTO create(Long idCaballo, CuidadoExtraInputDTO cuidado);
 
     /**
      * Elimina un cuidado extra para un caballo
      *
+     * @param idCaballo Id del caballo del cual se desea eliminar el cuidado extra
      * @param idCuidado Id del cuidado que se desea eliminar
      */
-    void deleteById(Long idCuidado);
+    void deleteById(Long idCaballo, Long idCuidado);
 }
