@@ -6,12 +6,14 @@ import {
 } from "react-router-dom";
 import { routes } from "./routes/";
 
-import { PrivateLayout } from "./layouts";
+import { PrivateLayout, PublicLayout } from "./layouts";
 import {
     FormularioCaballos,
     FormularioEdicionCaballos,
     MenuCaballos,
+    FormularioLogin,
 } from "./pages";
+import { PATH_HOME } from "./routes/RouteConstants";
 
 /**
  * Componente que enruta todas las solicitudes a diferentes paginas
@@ -20,9 +22,13 @@ const App = () => {
     return (
         <Router>
             <Routes>
+                {/* Solo accesible a usuarios no logeados */}
+                <Route path={"/"} element={<PublicLayout />}>
+                    <Route path={PATH_HOME} element={<FormularioLogin />} />
+                </Route>
                 {/* Solo accesible a usuarios logeados */}
                 <Route path="/" element={<PrivateLayout />}>
-                    <Route path={`${routes.CABALLOS}`}>
+                    <Route path={routes.CABALLOS}>
                         {/* Lista de caballos */}
                         <Route index element={<MenuCaballos />} />
                         {/* Creacion de caballos */}
