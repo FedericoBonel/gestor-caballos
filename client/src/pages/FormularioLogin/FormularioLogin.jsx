@@ -30,7 +30,7 @@ const FormularioLogin = () => {
         if (loginIsSuccesful) {
             validateUser(data.data);
         }
-    }, [loginIsSuccesful, data.data, validateUser]);
+    }, [loginIsSuccesful, data, validateUser]);
 
     // Si ocurrio un error que no es esperado, redirecciona a la pagina de error
     if (loginIsError && !loginError.response?.status === 401) {

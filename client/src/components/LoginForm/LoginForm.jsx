@@ -73,7 +73,7 @@ const LoginForm = ({ submitCredentials, showWrongCredentials, isLoading }) => {
         isLoading
     );
     return (
-        <Container sx={containerStyles}>
+        <Container component="main" sx={containerStyles}>
             <Card sx={cardStyles} variant="outlined">
                 <form onSubmit={onSubmit}>
                     <Typography variant="h1" gutterBottom>
