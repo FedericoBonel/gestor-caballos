@@ -5,6 +5,11 @@
 // Titulo de aplicacion
 export const APP_NAME = "Gestor de Caballos";
 
+// Navbar
+export const NAVBAR_HOME = "Hogar";
+export const NAVBAR_CABALLOS = "Caballos";
+export const NAVBAR_LOGOUT = "Salir del Sistema";
+
 // Menu de login
 export const MENU_INGRESAR_TITULO = "INGRESAR";
 export const MENU_INGRESAR_INFO = "Rellena tus credenciales para ingresar al sistema";

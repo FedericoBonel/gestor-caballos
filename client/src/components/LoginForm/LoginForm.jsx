@@ -19,6 +19,9 @@ const containerStyles = {
     height: "100vh",
     display: "flex",
     alignItems: "center",
+    bgcolor: "navbar.main",
+    mx: 0,
+    my: 0
 };
 
 const cardStyles = {
@@ -26,7 +29,6 @@ const cardStyles = {
     mx: "auto",
     p: 3,
     textAlign: "center",
-    borderRadius: 4,
 };
 
 const subtitleStyles = {
@@ -34,7 +36,7 @@ const subtitleStyles = {
 };
 
 const alertStyles = {
-    my: 2
+    my: 2,
 };
 
 const buttonStyles = {
@@ -68,12 +70,12 @@ const LoginForm = ({ submitCredentials, showWrongCredentials, isLoading }) => {
 
     // Renderizaciones ---------------------------------------------------------
     const canSubmit = !(
-        loginForm.username === "" &&
-        loginForm.password === "" &&
+        loginForm.username === "" ||
+        loginForm.password === "" ||
         isLoading
     );
     return (
-        <Container component="main" sx={containerStyles}>
+        <Container component="main" disableGutters maxWidth="xl" sx={containerStyles}>
             <Card sx={cardStyles} variant="outlined">
                 <form onSubmit={onSubmit}>
                     <Typography variant="h1" gutterBottom>

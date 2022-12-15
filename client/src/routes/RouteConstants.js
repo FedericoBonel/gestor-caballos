@@ -3,6 +3,7 @@
  */
 
 // Elementos del dominio
+export const DASHBOARD = "dashboard";
 export const CABALLOS = "caballos";
 
 // Verbos para el dominio
@@ -11,6 +12,9 @@ export const UPDATE = "editar";
 
 // Rutas
 export const PATH_HOME = "/";
+
+// Dashboard
+export const PATH_DASHBOARD = `/${DASHBOARD}`
 
 // Caballos
 export const PATH_CABALLOS = `/${CABALLOS}`;

@@ -10,7 +10,7 @@ const PublicLayout = () => {
     const loggedUser = useUsuario();
 
     // Si el usuario no esta autenticado, renderiza la pagina, si no envialo al dashboard
-    return loggedUser ? <Navigate to={routes.PATH_CABALLOS} /> : <Outlet />;
+    return loggedUser ? <Navigate to={routes.PATH_DASHBOARD} /> : <Outlet />;
 };
 
 export default PublicLayout;

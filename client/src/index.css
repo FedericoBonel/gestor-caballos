@@ -1,10 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
+
+* {
+    box-sizing: border-box;
+}
 
 :root {
     --color-background: #dee1e6;
 }
 
 body {
+    margin: 0;
+    padding: 0;
     position: relative;
     font-family: "Lato", sans-serif;
     -webkit-font-smoothing: antialiased;

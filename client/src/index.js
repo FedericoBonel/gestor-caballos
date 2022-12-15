@@ -15,6 +15,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
     palette: {
         secondary: { main: "#FEAF00" },
+        navbar: { main: "#F2EAE1" },
     },
     typography: {
         h1: {
@@ -25,6 +26,23 @@ const theme = createTheme({
         },
         subtitle2: {
             color: "#6C6C6C",
+        },
+        icon: {
+            fontSize: "1.5rem",
+        },
+    },
+    components: {
+        MuiButton: {
+            defaultProps: {
+                disableElevation: true,
+            },
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    borderRadius: "16px",
+                },
+            },
         },
     },
 });

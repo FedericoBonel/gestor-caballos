@@ -28,6 +28,11 @@ const App = () => {
                 </Route>
                 {/* Solo accesible a usuarios logeados */}
                 <Route path="/" element={<PrivateLayout />}>
+                    {/* Dashboard */}
+                    <Route
+                        path={`${routes.DASHBOARD}`}
+                        element={<p>dashboard</p>}
+                    />
                     <Route path={routes.CABALLOS}>
                         {/* Lista de caballos */}
                         <Route index element={<MenuCaballos />} />
