@@ -5,7 +5,28 @@
 }
 
 :root {
-    --color-background: #dee1e6;
+    --color-background: #f8f8f8;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    position: fixed;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    filter: opacity(0.5);
 }
 
 body {

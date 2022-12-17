@@ -16,6 +16,7 @@ const theme = createTheme({
     palette: {
         secondary: { main: "#FEAF00" },
         navbar: { main: "#F2EAE1" },
+        listItemBg: { main: "white" },
     },
     typography: {
         h1: {
