@@ -14,7 +14,20 @@ const axiosInstace = axios.create({
  */
 export const getCaballos = async (token, page = 1, limit = 10) => {
     const response = await axiosInstace.get(`/?page=${page}&limit=${limit}`, {
-        headers: { "Authorization": `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return await response.data;
+};
+
+/**
+ * Elimina el caballo desde el back end
+ * @param {String} token token del usuario autenticado
+ * @param {String} idCaballo identificador del caballo a ser eliminado
+ */
+export const deleteCaballo = async (token, idCaballo) => {
+    const response = await axiosInstace.delete(`/${idCaballo}`, {
+        headers: { Authorization: `Bearer ${token}` },
     });
 
     return await response.data;

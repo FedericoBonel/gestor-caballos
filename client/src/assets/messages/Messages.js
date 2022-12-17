@@ -23,6 +23,7 @@ export const MENU_INGRESAR_CREDENCIALES_INVALIDAS =
 // Menu de caballos
 export const MENU_CABALLOS_TITULO = "Lista de Caballos";
 export const MENU_CABALLOS_AGREGAR = "Registrar Caballo";
+export const MENU_CABALLOS_DEL_LOADING = "Eliminando Caballo...";
 
 // Listado de caballos
 export const LISTA_CABALLOS_NAME = "Nombre";

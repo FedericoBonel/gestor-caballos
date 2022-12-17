@@ -1,7 +1,14 @@
 import { useEffect } from "react";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Stack, Typography, Button } from "@mui/material";
+import {
+    Container,
+    Stack,
+    Typography,
+    Button,
+    Snackbar,
+    CircularProgress,
+} from "@mui/material";
 
 import "./MenuCaballos.css";
 import { useUsuario } from "../../context";
@@ -14,7 +21,7 @@ const containerStyles = {
     pt: 4,
     pb: 1,
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
 };
 
 const headerStyles = {
@@ -27,6 +34,7 @@ const headerStyles = {
  * Componente de la pagina del Menu de gestion de caballos
  */
 const MenuCaballos = () => {
+    const queryClient = useQueryClient();
     const usuario = useUsuario();
     const navigate = useNavigate();
 
@@ -59,6 +67,35 @@ const MenuCaballos = () => {
         }
     }, [caballos, caballosError, caballosIsError, navigate]);
 
+    const {
+        mutate: deleteCaballo,
+        isError: delCaballoIsError,
+        error: delCaballoError,
+        isLoading: delCaballoIsLoading,
+    } = useMutation(
+        ([token, idCaballo]) => caballosApi.deleteCaballo(token, idCaballo),
+        {
+            onSuccess: () =>
+                queryClient.invalidateQueries(apiConstants.CABALLOS_CACHE),
+        }
+    );
+
+    useEffect(() => {
+        if (delCaballoIsError) {
+            navigate(
+                `${routes.PATH_ERROR}/${
+                    delCaballoError.resposne
+                        ? delCaballoError.response.status
+                        : "500"
+                }`
+            );
+        }
+    }, [delCaballoError, delCaballoIsError, navigate]);
+
+    // Manejadores de eventos ---------------------------------------------
+    const onDeleteCaballo = (idCaballo) =>
+        deleteCaballo([usuario.token, idCaballo]);
+
     // Renderizaciones ----------------------------------------------------
     return (
         <Container sx={containerStyles}>
@@ -82,6 +119,13 @@ const MenuCaballos = () => {
                 isLoading={caballosIsLoading}
                 isLoadingNextPage={caballosIsFetchingNextPage}
                 onClickNextPage={getNextCaballosPage}
+                onDeleteCaballo={onDeleteCaballo}
+                deleteIsLoading={delCaballoIsLoading}
+            />
+            <Snackbar
+                open={delCaballoIsLoading}
+                message={messages.MENU_CABALLOS_DEL_LOADING}
+                action={<CircularProgress size={22} />}
             />
         </Container>
     );

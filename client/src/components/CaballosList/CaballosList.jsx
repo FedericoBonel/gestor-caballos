@@ -36,12 +36,21 @@ const CaballosList = ({
     isLoadingNextPage,
     isSuccess,
     onClickNextPage,
+    onDeleteCaballo,
+    deleteIsLoading
 }) => {
     // Renderizaciones -------------------------------------------
     let table;
     if (isSuccess) {
         const rows = caballosPages.map((page) =>
-            page.data.map((caballo) => <CaballoExcerpt caballo={caballo} />)
+            page.data.map((caballo) => (
+                <CaballoExcerpt
+                    key={caballo.id}
+                    caballo={caballo}
+                    onDelete={onDeleteCaballo}
+                    delIsLoading={deleteIsLoading}
+                />
+            ))
         );
 
         table = (

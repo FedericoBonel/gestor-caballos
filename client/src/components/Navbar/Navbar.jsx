@@ -24,6 +24,7 @@ const navbarStyles = {
     bgcolor: "navbar.main",
     justifyContent: "space-between",
     py: 2,
+    zIndex: 10
 };
 
 const listStyles = {

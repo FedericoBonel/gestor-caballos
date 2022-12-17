@@ -21,32 +21,44 @@ const listItemRightCellStyles = {
 /**
  * Componente de un item de un caballo singular de la lista de caballos
  */
-const CaballoExcerpt = ({ caballo }) => {
+const CaballoExcerpt = ({ caballo, onDelete, delIsLoading }) => {
     // Renderizaciones ---------------------------------------------------------
     return (
-        <TableRow key={caballo.id} sx={listItemStyles}>
-            <TableCell align="left" sx={listItemLeftCellStyles}>
-                {caballo.nombre}
-            </TableCell>
-            <TableCell align="center">{caballo.sexo}</TableCell>
-            <TableCell align="center">{caballo.alturaMetros}</TableCell>
-            <TableCell align="left">{caballo.colorPelo}</TableCell>
-            <TableCell align="right">
-                {new Date(caballo.fechaNacimiento).toLocaleDateString("es-AR")}
-            </TableCell>
-            <TableCell align="right" sx={listItemRightCellStyles}>
-                <IconButton aria-label={messages.LISTA_CABALLOS_BORRAR}>
-                    <DeleteOutlineOutlinedIcon />
-                </IconButton>
-                <IconButton
-                    aria-label={messages.LISTA_CABALLOS_EDITAR}
-                    component={Link}
-                    to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
-                >
-                    <EditOutlinedIcon />
-                </IconButton>
-            </TableCell>
-        </TableRow>
+            <TableRow sx={listItemStyles}>
+                {/* Nombre */}
+                <TableCell align="left" sx={listItemLeftCellStyles}>
+                    {caballo.nombre}
+                </TableCell>
+                {/* Sexo */}
+                <TableCell align="center">{caballo.sexo}</TableCell>
+                {/* Altura */}
+                <TableCell align="center">{caballo.alturaMetros}</TableCell>
+                {/* Color de Pelo */}
+                <TableCell align="left">{caballo.colorPelo}</TableCell>
+                {/* Fecha de Nacimiento */}
+                <TableCell align="right">
+                    {new Date(caballo.fechaNacimiento).toLocaleDateString(
+                        "es-AR"
+                    )}
+                </TableCell>
+                {/* Botones de accion */}
+                <TableCell align="right" sx={listItemRightCellStyles}>
+                    <IconButton
+                        aria-label={messages.LISTA_CABALLOS_BORRAR}
+                        onClick={() => onDelete(caballo.id)}
+                        disabled={delIsLoading}
+                    >
+                        <DeleteOutlineOutlinedIcon />
+                    </IconButton>
+                    <IconButton
+                        aria-label={messages.LISTA_CABALLOS_EDITAR}
+                        component={Link}
+                        to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
+                    >
+                        <EditOutlinedIcon />
+                    </IconButton>
+                </TableCell>
+            </TableRow>
     );
 };
 
