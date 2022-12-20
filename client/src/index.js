@@ -37,6 +37,11 @@ const theme = createTheme({
             defaultProps: {
                 disableElevation: true,
             },
+            styleOverrides: {
+                root: {
+                    padding: "8px 16px"
+                }
+            }
         },
         MuiCard: {
             styleOverrides: {

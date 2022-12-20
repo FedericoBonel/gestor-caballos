@@ -83,6 +83,12 @@ public class DataInitializerH2 implements ApplicationListener<ContextRefreshedEv
         espacio.setTipo(tipo);
         espacioRepository.save(espacio);
 
+        Espacio espacio2 = new Espacio();
+        espacio2.setLocalizacion("Atras del todo a la izquierda");
+        espacio2.setNombre("E02");
+        espacio2.setTipo(tipo);
+        espacioRepository.save(espacio2);
+
         Dueno dueno = new Dueno();
         dueno.setNombres("Federico Jorge");
         dueno.setApellidos("Bonel Tozzi");

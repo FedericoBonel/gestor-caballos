@@ -27,7 +27,7 @@ public class Espacio {
     private String localizacion;
 
     @NotNull
-    @Column(name = "nombre", length = 80)
+    @Column(name = "nombre", length = 80, unique=true)
     private String nombre;
 
     @NotNull

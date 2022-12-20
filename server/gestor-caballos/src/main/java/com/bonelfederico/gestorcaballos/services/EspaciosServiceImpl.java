@@ -34,6 +34,23 @@ public class EspaciosServiceImpl implements EspaciosService {
     }
 
     @Override
+    public List<EspacioExcerptDTO> getAllByOcupado(Boolean ocupado) {
+        List<EspacioExcerptDTO> result;
+
+        if (ocupado) {
+            result = espacioRepository.findByCaballoIsNotNull()
+                    .stream()
+                    .map(toExcerptDtoConverter::convert).toList();
+        } else {
+            result = espacioRepository.findByCaballoIsNull()
+                    .stream()
+                    .map(toExcerptDtoConverter::convert).toList();
+        }
+
+        return result;
+    }
+
+    @Override
     public EspacioDTO getById(Long idDueno) {
         return toDtoConverter.convert(espacioRepository.findById(idDueno)
                 .orElseThrow(() -> new NotFoundError("No se encontro un cliente con ese id: " + idDueno)));

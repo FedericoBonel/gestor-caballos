@@ -13,5 +13,5 @@ const axiosInstace = axios.create({
 export const authenticateUsuario = async ({ username, password }) => {
     const response = await axiosInstace.post("/", { username, password });
 
-    return await response.data;
+    return response.data;
 };

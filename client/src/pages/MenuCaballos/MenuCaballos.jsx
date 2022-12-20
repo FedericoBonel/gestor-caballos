@@ -98,7 +98,7 @@ const MenuCaballos = () => {
 
     // Renderizaciones ----------------------------------------------------
     return (
-        <Container sx={containerStyles}>
+        <Container component="main" sx={containerStyles}>
             <Stack direction="row" sx={headerStyles} component="header">
                 <Typography variant="h2">
                     {messages.MENU_CABALLOS_TITULO}

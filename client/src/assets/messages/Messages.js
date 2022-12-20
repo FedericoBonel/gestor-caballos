@@ -34,5 +34,35 @@ export const LISTA_CABALLOS_FUR_COLOR = "Color de Pelo";
 export const LISTA_CABALLOS_BIRTHDATE = "Fecha de Nacimiento";
 export const LISTA_CABALLOS_BORRAR = "Eliminar Caballo";
 export const LISTA_CABALLOS_EDITAR = "Editar Caballo";
-export const LISTA_CABALLOS_NO_MORE = "Has llegado al final de la lista de caballos";
+export const LISTA_CABALLOS_NO_MORE =
+    "Has llegado al final de la lista de caballos";
 export const LISTA_CABALLOS_LOAD_MORE = "Cargar Mas";
+
+// Listado de caballos
+export const FORM_NEW_CABALLO_TITULO = "Nuevo Caballo";
+
+export const FORM_NEW_CABALLO_ID = "Número de Identificación";
+export const FORM_NEW_CABALLO_ID_HELPER =
+    "La identificacion debe tener de 1 a 80 caracteres";
+export const FORM_NEW_CABALLO_FUR_COLOR = "Color de Pelo";
+export const FORM_NEW_CABALLO_FUR_COLOR_HELPER =
+    "El color de pelo puede tener de 1 a 80 caracteres";
+export const FORM_NEW_CABALLO_NAME = "Nombre";
+export const FORM_NEW_CABALLO_NAME_HELPER =
+    "El nombre debe tener de 1 a 80 caracteres";
+export const FORM_NEW_CABALLO_SEX = "Sexo";
+export const FORM_NEW_CABALLO_SEX_M = "Macho";
+export const FORM_NEW_CABALLO_SEX_F = "Hembra";
+export const FORM_NEW_CABALLO_HEIGHT = "Altura en Metros";
+export const FORM_NEW_CABALLO_HEIGHT_HELPER =
+    "La altura debe ser un numero de 0.1 a 3";
+export const FORM_NEW_CABALLO_BIRTHDATE = "Fecha de Nacimiento";
+export const FORM_NEW_CABALLO_OWNER = "Dueño";
+export const FORM_NEW_CABALLO_SPACE = "Espacio";
+export const FORM_NEW_CABALLO_NO_MORE_SPACES =
+    "Todos los espacios están ocupados, no pueden registrarse mas caballos";
+export const FORM_NEW_CABALLO_EXTRA_CARE = "Cuidados Extra";
+export const FORM_NEW_CABALLO_CARE = "Cuidado";
+export const FORM_NEW_CABALLO_AGREGAR_CUIDADO = "Agregar Cuidado Extra";
+export const FORM_NEW_CABALLO_REGISTRAR = "Registrar";
+export const FORM_NEW_CABALLO_CANCELAR = "Cancelar";

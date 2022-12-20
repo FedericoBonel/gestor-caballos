@@ -36,9 +36,17 @@ public class EspaciosController {
      */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public SuccessfulResponseDTO<List<EspacioExcerptDTO>> getEspacios() {
+    public SuccessfulResponseDTO<List<EspacioExcerptDTO>> getEspacios(@RequestParam(required = false) Boolean ocupado) {
         log.info("Obteniendo listado de espacios de caballos del sistema");
-        return new SuccessfulResponseDTO<>(espaciosService.getAll());
+        List<EspacioExcerptDTO> espacios;
+
+        if (ocupado == null) {
+            espacios = espaciosService.getAll();
+        } else {
+            espacios = espaciosService.getAllByOcupado(ocupado);
+        }
+
+        return new SuccessfulResponseDTO<>(espacios);
     }
 
     /**

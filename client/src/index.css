@@ -10,14 +10,13 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
     position: fixed;
 }
 
 ::-webkit-scrollbar-track {
     background: transparent;
     border: none;
-    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
