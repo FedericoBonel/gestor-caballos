@@ -8,7 +8,7 @@ import { routes } from "../routes";
 const containerStyles = {
     display:"flex",
     flexDirection:"row",
-    height: "100vh"
+    minHeight: "100vh"
 }
 
 /**

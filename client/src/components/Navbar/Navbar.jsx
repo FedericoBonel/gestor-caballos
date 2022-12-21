@@ -23,6 +23,7 @@ const navbarStyles = {
     bottom: "0",
     bgcolor: "navbar.main",
     justifyContent: "space-between",
+    height: "100vh",
     py: 2,
     zIndex: 10
 };

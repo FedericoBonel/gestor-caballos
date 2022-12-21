@@ -49,7 +49,7 @@ const App = () => {
                         />
                         {/* Edicion de caballos */}
                         <Route
-                            path={`${routes.UPDATE}/idCaballo`}
+                            path={`${routes.UPDATE}/:idCaballo`}
                             element={<FormularioEdicionCaballos />}
                         />
                     </Route>
