@@ -31,6 +31,9 @@ const theme = createTheme({
         icon: {
             fontSize: "1.5rem",
         },
+        caption: {
+            color: "#757575",
+        },
     },
     components: {
         MuiButton: {
@@ -39,9 +42,9 @@ const theme = createTheme({
             },
             styleOverrides: {
                 root: {
-                    padding: "8px 16px"
-                }
-            }
+                    padding: "8px 16px",
+                },
+            },
         },
         MuiCard: {
             styleOverrides: {

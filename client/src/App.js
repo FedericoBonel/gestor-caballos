@@ -12,6 +12,7 @@ import {
     FormularioEdicionCaballos,
     MenuCaballos,
     FormularioLogin,
+    Caballo,
 } from "./pages";
 import { PATH_HOME } from "./routes/RouteConstants";
 
@@ -36,6 +37,11 @@ const App = () => {
                     <Route path={routes.CABALLOS}>
                         {/* Lista de caballos */}
                         <Route index element={<MenuCaballos />} />
+                        {/* Lectura de caballopor id */}
+                        <Route
+                            path=":idCaballo"
+                            element={<Caballo />}
+                        />
                         {/* Creacion de caballos */}
                         <Route
                             path={routes.CREATE}
@@ -43,7 +49,7 @@ const App = () => {
                         />
                         {/* Edicion de caballos */}
                         <Route
-                            path={`${routes.UPDATE}/:idEmpleado`}
+                            path={`${routes.UPDATE}/idCaballo`}
                             element={<FormularioEdicionCaballos />}
                         />
                     </Route>

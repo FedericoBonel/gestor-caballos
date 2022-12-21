@@ -25,6 +25,19 @@ export const MENU_CABALLOS_TITULO = "Lista de Caballos";
 export const MENU_CABALLOS_AGREGAR = "Registrar Caballo";
 export const MENU_CABALLOS_DEL_LOADING = "Eliminando Caballo...";
 
+// Caballo por id
+export const DETAIL_CABALLO_ID = "Número de Identificación";
+export const DETAIL_CABALLO_FUR_COLOR = "Color de Pelo";
+export const DETAIL_CABALLO_NAME = "Nombre";
+export const DETAIL_CABALLO_SEX = "Sexo";
+export const DETAIL_CABALLO_SEX_M = "Macho";
+export const DETAIL_CABALLO_SEX_F = "Hembra";
+export const DETAIL_CABALLO_HEIGHT = "Altura en Metros";
+export const DETAIL_CABALLO_BIRTHDATE = "Fecha de Nacimiento";
+export const DETAIL_CABALLO_OWNER = "Dueño";
+export const DETAIL_CABALLO_SPACE = "Espacio Asignado";
+export const DETAIL_CABALLO_EXTRA_CARES = "Cuidados Extra";
+
 // Listado de caballos
 export const LISTA_CABALLOS_NAME = "Nombre";
 export const LISTA_CABALLOS_SEX = "Sexo";
@@ -38,7 +51,7 @@ export const LISTA_CABALLOS_NO_MORE =
     "Has llegado al final de la lista de caballos";
 export const LISTA_CABALLOS_LOAD_MORE = "Cargar Mas";
 
-// Listado de caballos
+// Formulario de caballos
 export const FORM_NEW_CABALLO_TITULO = "Nuevo Caballo";
 
 export const FORM_NEW_CABALLO_ID = "Número de Identificación";

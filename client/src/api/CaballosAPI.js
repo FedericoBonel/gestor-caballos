@@ -21,6 +21,19 @@ export const getCaballos = async (token, page = 1, limit = 10) => {
 };
 
 /**
+ * Busca un caballo por id desde el back end
+ * @param {String} token token del usuario autenticado
+ * @param {Number} idCaballo identificador del caballo a ser buscado
+ */
+export const getCaballoById = async (token, idCaballo) => {
+    const response = await axiosInstace.get(`/${idCaballo}`, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+};
+
+/**
  * Elimina el caballo desde el back end
  * @param {String} token token del usuario autenticado
  * @param {String} idCaballo identificador del caballo a ser eliminado

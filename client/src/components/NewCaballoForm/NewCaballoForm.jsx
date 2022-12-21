@@ -13,7 +13,7 @@ import {
     Box,
     MenuItem,
     Divider,
-    Typography,
+    ListItem,
     CircularProgress,
 } from "@mui/material";
 import AddCircle from "@mui/icons-material/AddCircleOutlineOutlined";
@@ -63,6 +63,7 @@ const cuidadoExtraStyles = {
     borderColor: "grey.600",
     p: 2,
     flex: 1,
+    whiteSpace: "pre-wrap",
 };
 
 /**
@@ -231,7 +232,8 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                 inputProps={{
                     inputMode: "decimal",
                     pattern: "[0-9]+([.,][0-9]+)?",
-                    step: "0.01",
+                    step: "0.1",
+                    min: constants.CABALLOS_HEIGHT_METERS_MIN_NUMBER,
                 }}
                 helperText={messages.FORM_NEW_CABALLO_HEIGHT_HELPER}
                 onChange={onChange}
@@ -339,20 +341,14 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                     size="large"
                     aria-label={messages.FORM_NEW_CABALLO_AGREGAR_CUIDADO}
                     onClick={onAddCuidadoExtra}
-                    disabled={maxCuidadosAlcanzados}
+                    disabled={maxCuidadosAlcanzados || !cuidadoExtra.length}
                 >
                     <AddCircle />
                 </IconButton>
             </FormControl>
             {form.cuidadosExtra.map((cuidadoExtra, index) => (
                 <FormControl sx={cuidadoExtraInputStyles} key={index}>
-                    <Typography
-                        component="li"
-                        variant="body1"
-                        sx={cuidadoExtraStyles}
-                    >
-                        {cuidadoExtra}
-                    </Typography>
+                    <ListItem sx={cuidadoExtraStyles}>{cuidadoExtra}</ListItem>
                     <IconButton
                         size="large"
                         aria-label={messages.FORM_NEW_CABALLO_AGREGAR_CUIDADO}

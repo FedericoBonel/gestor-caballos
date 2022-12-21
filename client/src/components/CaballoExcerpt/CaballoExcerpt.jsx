@@ -1,4 +1,9 @@
-import { TableRow, TableCell, IconButton } from "@mui/material";
+import {
+    TableRow,
+    TableCell,
+    IconButton,
+    Link as MuiLink,
+} from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Link } from "react-router-dom";
@@ -24,41 +29,45 @@ const listItemRightCellStyles = {
 const CaballoExcerpt = ({ caballo, onDelete, delIsLoading }) => {
     // Renderizaciones ---------------------------------------------------------
     return (
-            <TableRow sx={listItemStyles}>
-                {/* Nombre */}
-                <TableCell align="left" sx={listItemLeftCellStyles}>
+        <TableRow sx={listItemStyles}>
+            {/* Nombre */}
+            <TableCell align="left" sx={listItemLeftCellStyles}>
+                <MuiLink
+                    underline="hover"
+                    component={Link}
+                    to={`${routes.PATH_CABALLOS}/${caballo.id}`}
+                >
                     {caballo.nombre}
-                </TableCell>
-                {/* Sexo */}
-                <TableCell align="center">{caballo.sexo}</TableCell>
-                {/* Altura */}
-                <TableCell align="center">{caballo.alturaMetros}</TableCell>
-                {/* Color de Pelo */}
-                <TableCell align="left">{caballo.colorPelo}</TableCell>
-                {/* Fecha de Nacimiento */}
-                <TableCell align="right">
-                    {new Date(caballo.fechaNacimiento).toLocaleDateString(
-                        "es-AR"
-                    )}
-                </TableCell>
-                {/* Botones de accion */}
-                <TableCell align="right" sx={listItemRightCellStyles}>
-                    <IconButton
-                        aria-label={messages.LISTA_CABALLOS_BORRAR}
-                        onClick={() => onDelete(caballo.id)}
-                        disabled={delIsLoading}
-                    >
-                        <DeleteOutlineOutlinedIcon />
-                    </IconButton>
-                    <IconButton
-                        aria-label={messages.LISTA_CABALLOS_EDITAR}
-                        component={Link}
-                        to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
-                    >
-                        <EditOutlinedIcon />
-                    </IconButton>
-                </TableCell>
-            </TableRow>
+                </MuiLink>
+            </TableCell>
+            {/* Sexo */}
+            <TableCell align="center">{caballo.sexo}</TableCell>
+            {/* Altura */}
+            <TableCell align="center">{caballo.alturaMetros}</TableCell>
+            {/* Color de Pelo */}
+            <TableCell align="left">{caballo.colorPelo}</TableCell>
+            {/* Fecha de Nacimiento */}
+            <TableCell align="right">
+                {new Date(caballo.fechaNacimiento).toLocaleDateString("es-AR")}
+            </TableCell>
+            {/* Botones de accion */}
+            <TableCell align="right" sx={listItemRightCellStyles}>
+                <IconButton
+                    aria-label={messages.LISTA_CABALLOS_BORRAR}
+                    onClick={() => onDelete(caballo.id)}
+                    disabled={delIsLoading}
+                >
+                    <DeleteOutlineOutlinedIcon />
+                </IconButton>
+                <IconButton
+                    aria-label={messages.LISTA_CABALLOS_EDITAR}
+                    component={Link}
+                    to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
+                >
+                    <EditOutlinedIcon />
+                </IconButton>
+            </TableCell>
+        </TableRow>
     );
 };
 

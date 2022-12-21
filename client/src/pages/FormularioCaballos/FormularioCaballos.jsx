@@ -87,6 +87,7 @@ const FormularioCaballos = () => {
         isLoading: caballoIsLoading,
         isSuccess: caballoIsSuccess,
         mutate: saveCaballo,
+        data: savedCaballo,
     } = useMutation(
         (newCaballo) => caballosApi.postCaballo(usuario.token, newCaballo),
         {
@@ -107,9 +108,9 @@ const FormularioCaballos = () => {
 
     useEffect(() => {
         if (caballoIsSuccess) {
-            navigate(routes.PATH_CABALLOS);
+            navigate(`${routes.PATH_CABALLOS}/${savedCaballo.data?.id}`);
         }
-    }, [caballoIsSuccess, navigate]);
+    }, [caballoIsSuccess, navigate, savedCaballo]);
 
     // Renderizaciones ---------------------------------------------------------
     const dataLoaded = duenosIsSuccess && espaciosIsSuccess;
