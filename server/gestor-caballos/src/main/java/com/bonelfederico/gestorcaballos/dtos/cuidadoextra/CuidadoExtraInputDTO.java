@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
  */
 @Data
 public class CuidadoExtraInputDTO {
-    @Size(min = 1, max = 80, message = "Por favor provea una descripcion valida del cuidado del caballo valido")
+    @Size(min = 1, max = 255, message = "Por favor provea una descripcion valida del cuidado del caballo valido")
     @NotBlank(message = "Por favor provea una descripcion valida del cuidado del caballo.")
     private String descripcion;
 }

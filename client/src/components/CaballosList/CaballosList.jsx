@@ -9,6 +9,7 @@ import {
     Button,
     CircularProgress,
     Typography,
+    Snackbar,
 } from "@mui/material";
 
 import CaballoExcerpt from "../CaballoExcerpt/CaballoExcerpt";
@@ -37,7 +38,7 @@ const CaballosList = ({
     isSuccess,
     onClickNextPage,
     onDeleteCaballo,
-    deleteIsLoading
+    deleteIsLoading,
 }) => {
     // Renderizaciones -------------------------------------------
     let table;
@@ -115,6 +116,11 @@ const CaballosList = ({
         <>
             {table}
             {buttonLoadMore}
+            <Snackbar
+                open={deleteIsLoading}
+                message={messages.MENU_CABALLOS_DEL_LOADING}
+                action={<CircularProgress size={22} />}
+            />
         </>
     );
 };

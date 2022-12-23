@@ -81,7 +81,7 @@ const CaballoDetails = ({ caballo }) => {
                 {messages.DETAIL_CABALLO_SEX}
             </Typography>
             <Typography variant="body">
-                {caballo.sexo === messages.DETAIL_CABALLO_SEX_M
+                {caballo.sexo === "m"
                     ? messages.DETAIL_CABALLO_SEX_M
                     : messages.DETAIL_CABALLO_SEX_F}
             </Typography>
@@ -96,7 +96,7 @@ const CaballoDetails = ({ caballo }) => {
             <Typography variant="body">{caballo.espacio.nombre}</Typography>
         </Stack>
     );
-    
+
     const birthDate = (
         <Stack>
             <Typography variant="caption">
@@ -154,7 +154,7 @@ const CaballoDetails = ({ caballo }) => {
             </Stack>
         </Stack>
     );
-    
+
     return (
         <Container sx={containerStyles} component="main">
             {/* Encabezado */}

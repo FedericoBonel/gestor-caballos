@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { apiConstants } from "./";
+import { apiConstants, cuidadosApi } from "./";
 
 const axiosInstace = axios.create({
     baseURL: apiConstants.CABALLOS_URL,
@@ -47,10 +47,18 @@ export const deleteCaballo = async (token, idCaballo) => {
 };
 
 /**
- *
- * @param {*} token
- * @param {{nombre,fechaNacimiento,colorPelo,alturaMetros,sexo,identificacion,duenoId,espacioId,cuidadosExtra}} newCaballo
- * @returns
+ * Crea un nuevo caballo en el back end
+ * @param {String} token token del usuario autenticado
+ * @param {{nombre: String,
+ *          fechaNacimiento:String,
+ *          colorPelo: String,
+ *          alturaMetros: String,
+ *          sexo:String,
+ *          identificacion:String,
+ *          duenoId: String,
+ *          espacioId: String,
+ *          cuidadosExtra: [String]}} newCaballo Datos del nuevo caballo
+ * @returns Caballo creado en el back end
  */
 export const postCaballo = async (token, newCaballo) => {
     // Extrae los cuidados extra
@@ -65,18 +73,38 @@ export const postCaballo = async (token, newCaballo) => {
     let cuidadosResult = [];
     if (cuidadosExtra) {
         for (const cuidado of cuidadosExtra) {
-            const cuidadoRes = await axiosInstace.post(
-                `/${caballoResult.data.id}${apiConstants.CUIDADOS_SUB_URL}`,
-                { descripcion: cuidado },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
+            const cuidadoRes = await cuidadosApi.postCuidado(
+                token,
+                caballoResult.data.id,
+                cuidado
             );
 
-            cuidadosResult.push(cuidadoRes.data.data.descripcion);
+            cuidadosResult.push(cuidadoRes.data.descripcion);
         }
     }
     caballoResult.data.cuidadosExtra = cuidadosResult;
 
     return caballoResult;
+};
+
+/**
+ * Actualiza un caballo en el back end
+ * @param {String} token token del usuario autenticado
+ * @param {String} caballoId identificador del caballo a ser actualizado
+ * @param {{nombre: String,
+ *          fechaNacimiento:String,
+ *          colorPelo: String,
+ *          alturaMetros: String,
+ *          sexo:String,
+ *          identificacion:String,
+ *          duenoId: String,
+ *          espacioId: String}} updatedCaballo Datos actualizados del caballo
+ * @returns Caballo creado en el back end
+ */
+export const putCaballo = async (token, caballoId, updatedCaballo) => {
+    const response = await axiosInstace.put(`/${caballoId}`, updatedCaballo, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
 };

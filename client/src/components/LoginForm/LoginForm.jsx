@@ -21,7 +21,7 @@ const containerStyles = {
     alignItems: "center",
     bgcolor: "navbar.main",
     mx: 0,
-    my: 0
+    my: 0,
 };
 
 const cardStyles = {
@@ -75,14 +75,19 @@ const LoginForm = ({ submitCredentials, showWrongCredentials, isLoading }) => {
         isLoading
     );
     return (
-        <Container component="main" disableGutters maxWidth="xl" sx={containerStyles}>
+        <Container
+            component="main"
+            disableGutters
+            maxWidth="xl"
+            sx={containerStyles}
+        >
             <Card sx={cardStyles} variant="outlined">
                 <form onSubmit={onSubmit}>
                     <Typography variant="h1" gutterBottom>
                         {messages.APP_NAME}
                     </Typography>
                     <Typography sx={subtitleStyles} variant="h2" gutterBottom>
-                        {messages.MENU_INGRESAR_TITULO}
+                        {messages.MENU_INGRESAR_TITLE}
                     </Typography>
                     <Typography variant="subtitle2" gutterBottom>
                         {messages.MENU_INGRESAR_INFO}
@@ -131,7 +136,7 @@ const LoginForm = ({ submitCredentials, showWrongCredentials, isLoading }) => {
                 </form>
                 {showWrongCredentials && (
                     <Alert severity="error" sx={alertStyles}>
-                        {messages.MENU_INGRESAR_CREDENCIALES_INVALIDAS}
+                        {messages.MENU_INGRESAR_INVALID_CREDENTIALS}
                     </Alert>
                 )}
             </Card>

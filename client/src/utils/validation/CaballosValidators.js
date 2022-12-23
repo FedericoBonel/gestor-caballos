@@ -29,12 +29,18 @@ export const isId = (id) =>
 
 /**
  * Verifica la fecha de nacimiento de un caballo
- * @param {String} birthdate Fecha de nacimiento a verificar como ISO string
+ * @param {Dayjs|Date} birthdate Fecha de nacimiento a verificar como ISO string
  * @returns true si es valido, falso en caso contrario
  */
-export const isBirthdate = (birthdate) =>
-    validator.isISO8601(birthdate) &&
-    validator.isBefore(birthdate, new Date().toISOString());
+export const isBirthdate = (birthdate) => {
+    if (birthdate && birthdate.isValid()) {
+        return validator.isBefore(
+            birthdate.toISOString(),
+            new Date().toISOString()
+        );
+    }
+    return false;
+};
 
 /**
  * Verifica la altura de un caballo

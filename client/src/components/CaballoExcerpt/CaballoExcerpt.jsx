@@ -53,14 +53,14 @@ const CaballoExcerpt = ({ caballo, onDelete, delIsLoading }) => {
             {/* Botones de accion */}
             <TableCell align="right" sx={listItemRightCellStyles}>
                 <IconButton
-                    aria-label={messages.LISTA_CABALLOS_BORRAR}
+                    aria-label={messages.LISTA_CABALLOS_DELETE}
                     onClick={() => onDelete(caballo.id)}
                     disabled={delIsLoading}
                 >
                     <DeleteOutlineOutlinedIcon />
                 </IconButton>
                 <IconButton
-                    aria-label={messages.LISTA_CABALLOS_EDITAR}
+                    aria-label={messages.LISTA_CABALLOS_EDIT}
                     component={Link}
                     to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
                 >

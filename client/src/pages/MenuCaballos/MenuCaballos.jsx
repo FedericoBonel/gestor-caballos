@@ -1,14 +1,7 @@
 import { useEffect } from "react";
 import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    Container,
-    Stack,
-    Typography,
-    Button,
-    Snackbar,
-    CircularProgress,
-} from "@mui/material";
+import { Container, Stack, Typography, Button } from "@mui/material";
 
 import "./MenuCaballos.css";
 import { useUsuario } from "../../context";
@@ -22,6 +15,8 @@ const containerStyles = {
     pb: 1,
     display: "flex",
     flexDirection: "column",
+    flex: 1,
+    height: "100vh",
 };
 
 const headerStyles = {
@@ -73,7 +68,7 @@ const MenuCaballos = () => {
         error: delCaballoError,
         isLoading: delCaballoIsLoading,
     } = useMutation(
-        ([token, idCaballo]) => caballosApi.deleteCaballo(token, idCaballo),
+        (idCaballo) => caballosApi.deleteCaballo(usuario.token, idCaballo),
         {
             onSuccess: () =>
                 queryClient.invalidateQueries(apiConstants.CABALLOS_CACHE),
@@ -92,16 +87,12 @@ const MenuCaballos = () => {
         }
     }, [delCaballoError, delCaballoIsError, navigate]);
 
-    // Manejadores de eventos ---------------------------------------------
-    const onDeleteCaballo = (idCaballo) =>
-        deleteCaballo([usuario.token, idCaballo]);
-
     // Renderizaciones ----------------------------------------------------
     return (
         <Container component="main" sx={containerStyles}>
             <Stack direction="row" sx={headerStyles} component="header">
                 <Typography variant="h2">
-                    {messages.MENU_CABALLOS_TITULO}
+                    {messages.MENU_CABALLOS_TITLE}
                 </Typography>
                 <Button
                     variant="contained"
@@ -109,7 +100,7 @@ const MenuCaballos = () => {
                     to={routes.PATH_CREATE_CABALLOS}
                     color="secondary"
                 >
-                    {messages.MENU_CABALLOS_AGREGAR}
+                    {messages.MENU_CABALLOS_REGISTER_NEW}
                 </Button>
             </Stack>
             <CaballosList
@@ -119,13 +110,8 @@ const MenuCaballos = () => {
                 isLoading={caballosIsLoading}
                 isLoadingNextPage={caballosIsFetchingNextPage}
                 onClickNextPage={getNextCaballosPage}
-                onDeleteCaballo={onDeleteCaballo}
+                onDeleteCaballo={deleteCaballo}
                 deleteIsLoading={delCaballoIsLoading}
-            />
-            <Snackbar
-                open={delCaballoIsLoading}
-                message={messages.MENU_CABALLOS_DEL_LOADING}
-                action={<CircularProgress size={22} />}
             />
         </Container>
     );

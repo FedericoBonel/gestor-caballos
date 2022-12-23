@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate, Link } from "react-router-dom";
+import { useEffect } from "react";
 import {
     Container,
     Stack,
@@ -15,13 +16,14 @@ import { NewCaballoForm } from "../../components";
 import { messages } from "../../assets/messages";
 import { apiConstants, caballosApi, duenosApi, espaciosApi } from "../../api/";
 import { routes } from "../../routes";
-import { useEffect } from "react";
 
 const containerStyles = {
     pt: 4,
     pb: 1,
     display: "flex",
     flexDirection: "column",
+    flex: 1,
+    height: "100vh",
 };
 
 const headerStyles = {
@@ -142,7 +144,7 @@ const FormularioCaballos = () => {
         <Container component="main" sx={containerStyles}>
             <Stack direction="row" sx={headerStyles} component="header">
                 <Typography variant="h2">
-                    {messages.FORM_NEW_CABALLO_TITULO}
+                    {messages.FORM_NEW_CABALLO_TITLE}
                 </Typography>
                 <IconButton component={Link} to={routes.PATH_CABALLOS}>
                     <CloseIcon />

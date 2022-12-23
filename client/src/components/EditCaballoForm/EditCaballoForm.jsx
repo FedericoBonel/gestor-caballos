@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
 import {
     Stack,
     TextField,
@@ -43,20 +44,29 @@ const formStyles = {
 };
 
 /**
- * Componente del formulario de creacion de caballos
+ * Componente del formulario de edicion de caballos
  */
-const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
+const EditCaballoForm = ({
+    duenos,
+    espacios,
+    submitCaballo,
+    isCaballoLoading,
+    caballo,
+    onCreateCuidado,
+    onDeleteCuidado,
+    isCuidadoLoading,
+}) => {
     // Estados ----------------------------------------------------------------------------
     const [form, setForm] = useState({
-        identificacion: "",
-        nombre: "",
-        sexo: "",
-        fechaNacimiento: "",
-        alturaMetros: "",
-        colorPelo: "",
-        duenoId: "",
-        espacioId: "",
-        cuidadosExtra: [],
+        identificacion: caballo.identificacion,
+        nombre: caballo.nombre,
+        sexo: caballo.sexo,
+        fechaNacimiento: dayjs(caballo.fechaNacimiento),
+        alturaMetros: caballo.alturaMetros.toString(),
+        colorPelo: caballo.colorPelo,
+        duenoId: caballo.dueno.id,
+        espacioId: caballo.espacio.id,
+        cuidadosExtra: caballo.cuidadosExtra,
     });
     const [showCuidadosDialog, setShowCuidadosDialog] = useState(false);
 
@@ -86,8 +96,12 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
     const isFormFieldValid = validateForm(form);
 
     const canSubmit =
-        Object.keys(isFormFieldValid).every((key) => isFormFieldValid[key]) &&
-        !isLoading;
+        Object.keys(isFormFieldValid).every((key) => {
+            if (key !== "cuidadosExtra") {
+                return isFormFieldValid[key];
+            }
+            return isFormFieldValid[key].every((cuidado) => cuidado);
+        }) && !isCaballoLoading;
 
     const shouldShowWarning = (fieldName) =>
         !isFormFieldValid[fieldName] && touched[fieldName];
@@ -117,21 +131,6 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             fechaNacimiento: value,
         }));
 
-    const onAddCuidadoExtra = (cuidadoExtra) =>
-        setForm((prevForm) => ({
-            ...prevForm,
-            cuidadosExtra: [...prevForm.cuidadosExtra, cuidadoExtra],
-        }));
-
-    const onRemoveCuidadoExtra = (cuidado, indexCuidado) => {
-        setForm((prevForm) => ({
-            ...prevForm,
-            cuidadosExtra: prevForm.cuidadosExtra.filter(
-                (cuidado, index) => index !== indexCuidado
-            ),
-        }));
-    };
-
     // Renderizaciones ---------------------------------------------------------------------
     const idAndName = (
         <Stack direction="row" sx={formRowStyles}>
@@ -140,10 +139,10 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                 id="identificacion"
                 name="identificacion"
                 value={form.identificacion}
-                label={messages.FORM_NEW_CABALLO_ID}
+                label={messages.FORM_EDIT_CABALLO_ID}
                 fullWidth
                 required
-                helperText={messages.FORM_NEW_CABALLO_ID_HELPER}
+                helperText={messages.FORM_EDIT_CABALLO_ID_HELPER}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={shouldShowWarning("identificacion")}
@@ -152,11 +151,11 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             <TextField
                 id="nombre"
                 name="nombre"
-                label={messages.FORM_NEW_CABALLO_NAME}
                 value={form.nombre}
+                label={messages.FORM_EDIT_CABALLO_NAME}
                 fullWidth
                 required
-                helperText={messages.FORM_NEW_CABALLO_NAME_HELPER}
+                helperText={messages.FORM_EDIT_CABALLO_NAME_HELPER}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={shouldShowWarning("nombre")}
@@ -168,12 +167,13 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
         <Stack direction="row" sx={formRowStyles}>
             {/* Fecha de nacimiento */}
             <DesktopDatePicker
-                label={messages.FORM_NEW_CABALLO_BIRTHDATE}
+                label={messages.FORM_EDIT_CABALLO_BIRTHDATE}
                 maxDate={new Date()}
                 inputFormat="DD/MM/YYYY"
                 value={form.fechaNacimiento}
                 onChange={onChangeDate}
-                renderInput={(params) => (
+                disableMaskedInput
+                renderInput={({ ...params }) => (
                     <TextField
                         {...params}
                         name="fechaNacimiento"
@@ -186,7 +186,8 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             <TextField
                 id="alturaMetros"
                 name="alturaMetros"
-                label={messages.FORM_NEW_CABALLO_HEIGHT}
+                value={form.alturaMetros}
+                label={messages.FORM_EDIT_CABALLO_HEIGHT}
                 required
                 type="number"
                 inputProps={{
@@ -195,15 +196,14 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                     step: "0.1",
                     min: constants.CABALLOS_HEIGHT_METERS_MIN_NUMBER,
                 }}
-                helperText={messages.FORM_NEW_CABALLO_HEIGHT_HELPER}
+                helperText={messages.FORM_EDIT_CABALLO_HEIGHT_HELPER}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={shouldShowWarning("alturaMetros")}
-                value={form.alturaMetros}
             />
             {/* Sexo */}
             <FormControl>
-                <FormLabel required>{messages.FORM_NEW_CABALLO_SEX}</FormLabel>
+                <FormLabel required>{messages.FORM_EDIT_CABALLO_SEX}</FormLabel>
                 <RadioGroup
                     name="sexo"
                     value={form.sexo}
@@ -213,12 +213,12 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                     <FormControlLabel
                         value="f"
                         control={<Radio />}
-                        label={messages.FORM_NEW_CABALLO_SEX_F}
+                        label={messages.FORM_EDIT_CABALLO_SEX_F}
                     />
                     <FormControlLabel
                         value="m"
                         control={<Radio />}
-                        label={messages.FORM_NEW_CABALLO_SEX_M}
+                        label={messages.FORM_EDIT_CABALLO_SEX_M}
                     />
                 </RadioGroup>
             </FormControl>
@@ -230,13 +230,13 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
         <TextField
             id="colorPelo"
             name="colorPelo"
-            label={messages.FORM_NEW_CABALLO_FUR_COLOR}
+            value={form.colorPelo}
+            label={messages.FORM_EDIT_CABALLO_FUR_COLOR}
             required
             onChange={onChange}
             onBlur={onBlur}
             error={shouldShowWarning("colorPelo")}
-            helperText={messages.FORM_NEW_CABALLO_FUR_COLOR_HELPER}
-            value={form.colorPelo}
+            helperText={messages.FORM_EDIT_CABALLO_FUR_COLOR_HELPER}
         />
     );
 
@@ -246,7 +246,7 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             <TextField
                 id="duenoId"
                 name="duenoId"
-                label={messages.FORM_NEW_CABALLO_OWNER}
+                label={messages.FORM_EDIT_CABALLO_OWNER}
                 select
                 fullWidth
                 required
@@ -265,7 +265,7 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             <TextField
                 id="espacioId"
                 name="espacioId"
-                label={messages.FORM_NEW_CABALLO_SPACE}
+                label={messages.FORM_EDIT_CABALLO_SPACE}
                 select
                 fullWidth
                 required
@@ -286,14 +286,18 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
     const extraCares = (
         <>
             <Button onClick={() => setShowCuidadosDialog(true)}>
-                {messages.FORM_NEW_CABALLO_SHOW_CARE}
+                {messages.FORM_EDIT_CABALLO_SHOW_CARE}
             </Button>
             <CuidadosExtraForm
                 openModal={showCuidadosDialog}
                 onClose={() => setShowCuidadosDialog(false)}
-                onAddCuidado={onAddCuidadoExtra}
-                onRemoveCuidado={onRemoveCuidadoExtra}
-                cuidadosExtra={form.cuidadosExtra}
+                onAddCuidado={onCreateCuidado}
+                onRemoveCuidado={(cuidadoExtra) =>
+                    onDeleteCuidado(cuidadoExtra.id)
+                }
+                cuidadosExtra={caballo.cuidadosExtra}
+                isAddLoading={isCuidadoLoading}
+                isDeleteLoading={isCuidadoLoading}
             />
         </>
     );
@@ -317,17 +321,17 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
                         component={Link}
                         to={routes.PATH_CABALLOS}
                     >
-                        {messages.FORM_NEW_CABALLO_CANCEL}
+                        {messages.FORM_EDIT_CABALLO_CANCEL}
                     </Button>
                     <Button
                         variant="contained"
                         type="submit"
                         disabled={!canSubmit}
                     >
-                        {isLoading ? (
+                        {isCaballoLoading ? (
                             <CircularProgress size={24} />
                         ) : (
-                            messages.FORM_NEW_CABALLO_REGISTER
+                            messages.FORM_EDIT_CABALLO_REGISTER
                         )}
                     </Button>
                 </Stack>
@@ -336,4 +340,4 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
     );
 };
 
-export default NewCaballoForm;
+export default EditCaballoForm;
