@@ -8,6 +8,7 @@ import {
     ListItem,
     Box,
 } from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 
@@ -159,7 +160,16 @@ const CaballoDetails = ({ caballo }) => {
         <Container sx={containerStyles} component="main">
             {/* Encabezado */}
             <Stack direction="row" component="header" sx={headerStyles}>
-                <Typography variant="h2">{caballo.nombre}</Typography>
+                <Stack direction="row" gap={1}>
+                    <Typography variant="h2">{caballo.nombre}</Typography>
+                    <IconButton
+                        aria-label={messages.LISTA_CABALLOS_EDIT}
+                        component={Link}
+                        to={`${routes.PATH_UPDATE_CABALLOS}/${caballo.id}`}
+                    >
+                        <EditOutlinedIcon />
+                    </IconButton>
+                </Stack>
                 <IconButton component={Link} to={routes.PATH_CABALLOS}>
                     <CloseIcon />
                 </IconButton>

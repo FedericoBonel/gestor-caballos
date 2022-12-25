@@ -51,6 +51,13 @@ export const LISTA_CABALLOS_NO_MORE =
     "Has llegado al final de la lista de caballos";
 export const LISTA_CABALLOS_LOAD_MORE = "Cargar Mas";
 
+// Formulario de confirmacion de eliminacion
+export const FORM_DELETE_HORSE_TITLE = "Eliminando Caballo";
+export const FORM_DELETE_HORSE_QUESTION =
+    "Está a punto de eliminar el caballo del sistema y toda su información.\nEsta acción es irreversible.\n¿Desea continuar?";
+export const FORM_DELETE_HORSE_OK = "Continuar";
+export const FORM_DELETE_HORSE_CANCEL = "Cancelar";
+
 // Formulario de cuidados extra
 export const FORM_EXTRA_CARES_TITLE = "Cuidados Extra";
 export const FORM_EXTRA_CARES_CLOSE = "Cerrar";
