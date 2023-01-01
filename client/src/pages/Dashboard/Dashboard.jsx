@@ -19,7 +19,7 @@ const containerStyles = {
 const cardStyles = {
     width: "300px",
     height: "fit-content",
-    backgroundColor: "primary.light",
+    backgroundColor: "dashboardCard.main",
     textDecoration: "none",
 };
 /**

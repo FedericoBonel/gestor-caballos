@@ -17,6 +17,7 @@ const theme = createTheme({
         secondary: { main: "#FEAF00" },
         navbar: { main: "#F2EAE1" },
         listItemBg: { main: "white" },
+        dashboardCard: {main: "#CDEBFF"}
     },
     typography: {
         h1: {
