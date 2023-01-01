@@ -77,6 +77,10 @@ public class DataInitializerH2 implements ApplicationListener<ContextRefreshedEv
         tipo.setDescripcion("Piquete");
         tipoRepository.save(tipo);
 
+        Tipo tipo2 = new Tipo();
+        tipo2.setDescripcion("Box");
+        tipoRepository.save(tipo2);
+
         Espacio espacio = new Espacio();
         espacio.setLocalizacion("Atras del todo a la derecha");
         espacio.setNombre("E01");
@@ -88,6 +92,12 @@ public class DataInitializerH2 implements ApplicationListener<ContextRefreshedEv
         espacio2.setNombre("E02");
         espacio2.setTipo(tipo);
         espacioRepository.save(espacio2);
+
+        Espacio espacio3 = new Espacio();
+        espacio3.setLocalizacion("Atras del todo a la izquierda");
+        espacio3.setNombre("E03");
+        espacio3.setTipo(tipo2);
+        espacioRepository.save(espacio3);
 
         Dueno dueno = new Dueno();
         dueno.setNombres("Federico Jorge");
