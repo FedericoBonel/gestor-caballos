@@ -50,6 +50,12 @@ public class JWTVerificationFilter extends OncePerRequestFilter {
                         + "'Bearer' ";
                 ErrorResponseDTO<String> resBody = new ErrorResponseDTO<>(error);
                 httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+
+                httpResponse.setHeader("Access-Control-Allow-Origin", httpRequest.getHeader("Origin"));
+                httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+                httpResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+                httpResponse.setHeader("Access-Control-Max-Age", "3600");
+                httpResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, Authorization, x-auth-token");
                 httpResponse.setContentType("application/json");
                 httpResponse.getWriter().write(objectMapper.writeValueAsString(resBody));
                 return;

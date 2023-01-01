@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery, useMutation, useQueryClient } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Stack, Typography, Button } from "@mui/material";
+import { Container, Stack, Typography, Button, TextField } from "@mui/material";
 
 import "./MenuCaballos.css";
 import { useUsuario } from "../../context";
@@ -23,7 +23,12 @@ const headerStyles = {
     py: 2,
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
 };
+
+const registerButtonStyles = { height: "100%" };
+
+const searchBarStyles = { backgroundColor: "listItemBg.main", flex: 1, mx: 5 };
 
 /**
  * Componente de la pagina del Menu de gestion de caballos
@@ -32,6 +37,9 @@ const MenuCaballos = () => {
     const queryClient = useQueryClient();
     const usuario = useUsuario();
     const navigate = useNavigate();
+
+    // Estados -----------------------------------------------------------
+    const [searchQuery, setSearchQuery] = useState("");
 
     // Interacciones con API ---------------------------------------------
     const {
@@ -44,9 +52,14 @@ const MenuCaballos = () => {
         hasNextPage: caballosHasNextPage,
         isFetchingNextPage: caballosIsFetchingNextPage,
     } = useInfiniteQuery({
-        queryKey: apiConstants.CABALLOS_CACHE,
+        queryKey: [apiConstants.CABALLOS_CACHE, searchQuery],
         queryFn: ({ pageParam = 1 }) =>
-            caballosApi.getCaballos(usuario.token, pageParam),
+            caballosApi.getCaballos(
+                usuario.token,
+                pageParam,
+                undefined,
+                searchQuery
+            ),
         getNextPageParam: (lastPage, allPages) =>
             // Si la ultima pagina tuvo resultados agrega una pagina mas
             lastPage.data?.length ? allPages.length + 1 : undefined,
@@ -56,7 +69,9 @@ const MenuCaballos = () => {
         if (caballosIsError) {
             navigate(
                 `${routes.PATH_ERROR}/${
-                    caballosError.response ? caballos.response.status : "500"
+                    caballosError.response
+                        ? caballosError.response.status
+                        : "500"
                 }`
             );
         }
@@ -94,11 +109,19 @@ const MenuCaballos = () => {
                 <Typography variant="h2">
                     {messages.MENU_CABALLOS_TITLE}
                 </Typography>
+                <TextField
+                    label={messages.MENU_CABALLOS_SEARCH_BAR_LABEL}
+                    value={searchQuery}
+                    type={"search"}
+                    sx={searchBarStyles}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
                 <Button
                     variant="contained"
                     component={Link}
                     to={routes.PATH_CREATE_CABALLOS}
                     color="secondary"
+                    sx={registerButtonStyles}
                 >
                     {messages.MENU_CABALLOS_REGISTER_NEW}
                 </Button>

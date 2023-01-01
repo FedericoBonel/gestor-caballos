@@ -10,6 +10,9 @@ export const NAVBAR_HOME = "Hogar";
 export const NAVBAR_CABALLOS = "Caballos";
 export const NAVBAR_LOGOUT = "Salir del Sistema";
 
+// Dashboard
+export const DASHBOARD_HORSE = "Caballos";
+
 // Pagina de login
 export const MENU_INGRESAR_TITLE = "INGRESAR";
 export const MENU_INGRESAR_INFO =
@@ -24,6 +27,7 @@ export const MENU_INGRESAR_INVALID_CREDENTIALS =
 export const MENU_CABALLOS_TITLE = "Lista de Caballos";
 export const MENU_CABALLOS_REGISTER_NEW = "Registrar Caballo";
 export const MENU_CABALLOS_DEL_LOADING = "Eliminando Caballo...";
+export const MENU_CABALLOS_SEARCH_BAR_LABEL = "Buscar por Nombre"
 
 // Caballo por id
 export const DETAIL_CABALLO_ID = "Número de Identificación";
@@ -122,3 +126,19 @@ export const FORM_EDIT_CABALLO_REGISTER = "Guardar";
 export const FORM_EDIT_CABALLO_CANCEL = "Cancelar";
 export const FORM_EDIT_CABALLO_SHOW_CARE = "Editar Cuidados";
 export const FORM_EDIT_CABALLO_CARE_LOADING = "Modificando cuidados...";
+
+// Pagina de error
+export const ERROR_TITLE = "Uy, ¡sucedió un error!";
+export const ERROR_400 =
+    "Parece que hubo un problema con los datos que ha proporcionado, por favor intente nuevamente con otros datos y de persistir el problema avise al administrador del sistema";
+export const ERROR_401 =
+    "Las credenciales que ha proporcionado son incorrectas o han expirado, por favor autentiquese nuevamente en el siguiente enlace:";
+export const ERROR_404 =
+    "Parece que el enlace o recurso al que estas intentando acceder ya no existe en el sistema";
+export const ERROR_500 =
+    "Lo sentimos, ha sucedido un error en el servidor, por favor intente nuevamente y de persistir el problema contacte con su adminstrador del sistema";
+export const ERROR_UNKNOWN =
+    "Lo sentimos, un error desconocido ha ocurrido, le recomendamos que contacte al administrador de su sistema y le informe del problema";
+export const ERROR_LOGIN_LINK = "Autenticarse";
+export const HOME_LINK = "Volver al inicio";
+export const ERROR = "Error"

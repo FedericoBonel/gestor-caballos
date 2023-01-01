@@ -11,11 +11,16 @@ const axiosInstace = axios.create({
  * @param {String} token token del usuario autenticado
  * @param {Number} page pagina de caballos a buscar
  * @param {Number} limit numero de caballos por pagina
+ * @param {String} query parametro de busqueda (busca por nombre de caballo)
  */
-export const getCaballos = async (token, page = 1, limit = 10) => {
-    const response = await axiosInstace.get(`/?page=${page}&limit=${limit}`, {
-        headers: { Authorization: `Bearer ${token}` },
-    });
+export const getCaballos = async (token, page = 1, limit = 10, query) => {
+    const queryParam = query && query.length ? `&query=${query}` : "";
+    const response = await axiosInstace.get(
+        `/?page=${page}&limit=${limit}${queryParam}`,
+        {
+            headers: { Authorization: `Bearer ${token}` },
+        }
+    );
 
     return response.data;
 };

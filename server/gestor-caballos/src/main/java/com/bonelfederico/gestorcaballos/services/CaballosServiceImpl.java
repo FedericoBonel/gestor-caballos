@@ -12,15 +12,18 @@ import com.bonelfederico.gestorcaballos.models.Espacio;
 import com.bonelfederico.gestorcaballos.repositories.CaballosRepository;
 import com.bonelfederico.gestorcaballos.repositories.DuenosRepository;
 import com.bonelfederico.gestorcaballos.repositories.EspacioRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CaballosServiceImpl implements CaballosService {
+
+    private static final ExampleMatcher SEARCH_CONDITIONS_MATCH_ANY = ExampleMatcher
+            .matchingAny()
+            .withMatcher("nombre", ExampleMatcher.GenericPropertyMatchers.contains())
+            .withIgnoreCase();
 
     private final CaballosRepository caballosRepository;
     private final DuenosRepository duenosRepository;
@@ -64,6 +67,19 @@ public class CaballosServiceImpl implements CaballosService {
         List<Caballo> foundCaballos = caballosRepository.findAll();
 
         return foundCaballos.stream().map(toDtoConverter::convert).toList();
+    }
+
+    @Override
+    public List<CaballoDTO> getAllByQuery(Integer page, Integer limit, String query) {
+        Pageable pageable = PageRequest.of(page, limit);
+
+        Caballo caballoExample = new Caballo();
+        caballoExample.setNombre(query);
+        Example<Caballo> example = Example.of(caballoExample, SEARCH_CONDITIONS_MATCH_ANY);
+
+        return caballosRepository.findAll(example, pageable)
+                .map(toDtoConverter::convert)
+                .getContent();
     }
 
     @Override

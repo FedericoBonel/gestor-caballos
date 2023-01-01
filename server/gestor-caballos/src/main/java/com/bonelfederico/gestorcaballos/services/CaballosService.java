@@ -28,6 +28,16 @@ public interface CaballosService {
     List<CaballoDTO> getAll();
 
     /**
+     * Obtiene una lista con todos los caballos registrados en el sistema por pagina y parametro de busqueda
+     *
+     * @param page Pagina de caballos a buscar
+     * @param limit Cantidad de caballos por pagina
+     * @param query String conteniendo el parametro de busqueda
+     * @return Lista con todos los caballos registrados en el sistema para esa pagina con ese limite
+     */
+    List<CaballoDTO> getAllByQuery(Integer page, Integer limit, String query);
+
+    /**
      * Obtiene una lista con todos los caballos registrados en el sistema por pagina
      *
      * @param page Pagina de caballos a buscar

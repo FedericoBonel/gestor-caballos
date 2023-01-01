@@ -41,9 +41,16 @@ public class CaballoController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public SuccessfulResponseDTO<List<CaballoDTO>> getCaballos(
-            @RequestParam(required = false, defaultValue = "1") Integer page) {
-        log.debug("Obteniendo lista de caballos");
-        return new SuccessfulResponseDTO<>(caballosService.getAllByPage(page - 1, PAGE_LIMIT));
+            @RequestParam(required = false, defaultValue = "1") Integer page,
+            @RequestParam(required = false) String query) {
+        log.info("Obteniendo lista de caballos con parametros: query=" + query + " page=" + page);
+        List<CaballoDTO> caballos;
+        if (query != null) {
+            caballos = caballosService.getAllByQuery(page - 1, PAGE_LIMIT, query);
+        } else {
+            caballos = caballosService.getAllByPage(page - 1, PAGE_LIMIT);
+        }
+        return new SuccessfulResponseDTO<>(caballos);
     }
 
     /**

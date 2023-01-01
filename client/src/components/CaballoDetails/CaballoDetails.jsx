@@ -66,9 +66,7 @@ const CaballoDetails = ({ caballo }) => {
             <Typography variant="caption">
                 {messages.DETAIL_CABALLO_ID}
             </Typography>
-            <Typography variant="body">
-                {caballo.identificacion}
-            </Typography>
+            <Typography variant="body">{caballo.identificacion}</Typography>
         </Stack>
     );
 
@@ -136,32 +134,34 @@ const CaballoDetails = ({ caballo }) => {
         </Stack>
     );
 
-    const extraCares = (
-        <Stack>
-            <Typography variant="caption">
-                {messages.DETAIL_CABALLO_EXTRA_CARES}
-            </Typography>
-            <Stack sx={extraCaresListStyles}>
-                <List>
-                    {caballo.cuidadosExtra.map((cuidado, index) => {
-                        return (
-                            <Box key={cuidado.id}>
-                                <ListItem
-                                    key={cuidado.id}
-                                    sx={cuidadoExtraStyles}
-                                >
-                                    {cuidado.descripcion}
-                                </ListItem>
-                                {index !== caballo.cuidadosExtra.length - 1 && (
-                                    <Divider />
-                                )}
-                            </Box>
-                        );
-                    })}
-                </List>
+    const extraCares = caballo.cuidadosExtra &&
+        Boolean(caballo.cuidadosExtra.length) && (
+            <Stack>
+                <Typography variant="caption">
+                    {messages.DETAIL_CABALLO_EXTRA_CARES}
+                </Typography>
+                <Stack sx={extraCaresListStyles}>
+                    <List>
+                        {caballo.cuidadosExtra.map((cuidado, index) => {
+                            return (
+                                <Box key={cuidado.id}>
+                                    <ListItem
+                                        key={cuidado.id}
+                                        sx={cuidadoExtraStyles}
+                                    >
+                                        {cuidado.descripcion}
+                                    </ListItem>
+                                    {index !==
+                                        caballo.cuidadosExtra.length - 1 && (
+                                        <Divider />
+                                    )}
+                                </Box>
+                            );
+                        })}
+                    </List>
+                </Stack>
             </Stack>
-        </Stack>
-    );
+        );
 
     return (
         <Container sx={containerStyles} component="main">

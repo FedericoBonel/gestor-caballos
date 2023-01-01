@@ -33,7 +33,7 @@ const FormularioLogin = () => {
     }, [loginIsSuccesful, data, validateUser]);
 
     // Si ocurrio un error que no es esperado, redirecciona a la pagina de error
-    if (loginIsError && !loginError.response?.status === 401) {
+    if (loginIsError && (!loginError.response?.status === 401 || !loginError.response)) {
         navigate(
             `${routes.PATH_ERROR}/${
                 loginError.response ? loginError.response.status : "500"

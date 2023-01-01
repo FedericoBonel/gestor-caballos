@@ -13,6 +13,8 @@ import {
     MenuCaballos,
     FormularioLogin,
     Caballo,
+    Error,
+    Dashboard,
 } from "./pages";
 import { PATH_HOME } from "./routes/RouteConstants";
 
@@ -32,16 +34,13 @@ const App = () => {
                     {/* Dashboard */}
                     <Route
                         path={`${routes.DASHBOARD}`}
-                        element={<p>dashboard</p>}
+                        element={<Dashboard />}
                     />
                     <Route path={routes.CABALLOS}>
                         {/* Lista de caballos */}
                         <Route index element={<MenuCaballos />} />
                         {/* Lectura de caballopor id */}
-                        <Route
-                            path=":idCaballo"
-                            element={<Caballo />}
-                        />
+                        <Route path=":idCaballo" element={<Caballo />} />
                         {/* Creacion de caballos */}
                         <Route
                             path={routes.CREATE}
@@ -57,7 +56,7 @@ const App = () => {
                 {/* Errores */}
                 <Route
                     path={`${routes.PATH_ERROR}/:errorCode`}
-                    element={<p>Error</p>}
+                    element={<Error />}
                 />
                 <Route
                     path="*"

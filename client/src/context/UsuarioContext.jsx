@@ -1,3 +1,4 @@
+import { useQueryClient } from "react-query";
 import { useState, createContext, useContext } from "react";
 import cookies from "js-cookie";
 
@@ -24,6 +25,8 @@ export const useUsuarioUpdate = () => useContext(userUpdateContext);
  * Proveedor del contexto donde se almacena el usuario logeado
  */
 export const UsuarioProvider = ({ children }) => {
+    const queryClient = useQueryClient();
+
     const [user, setUser] = useState(
         savedCookie ? JSON.parse(savedCookie) : null
     );
@@ -38,6 +41,7 @@ export const UsuarioProvider = ({ children }) => {
     const invalidateUser = () => {
         cookies.remove("user");
         setUser();
+        queryClient.clear();
     };
 
     // Provee los contextos a los hijos de este componente
