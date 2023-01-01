@@ -276,7 +276,7 @@ const NewCaballoForm = ({ duenos, espacios, submitCaballo, isLoading }) => {
             >
                 {espacios.map((espacio) => (
                     <MenuItem key={espacio.id} value={espacio.id}>
-                        {espacio.nombre}
+                        {espacio.nombre} - {espacio.tipo}
                     </MenuItem>
                 ))}
             </TextField>
