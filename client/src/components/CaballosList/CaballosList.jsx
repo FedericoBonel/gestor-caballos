@@ -25,6 +25,7 @@ const tableStyles = {
     borderCollapse: "separate",
     borderSpacing: "0 16px",
     th: { borderTop: 1, borderColor: "grey.400" },
+    maxWidth: "100%"
 };
 
 /**

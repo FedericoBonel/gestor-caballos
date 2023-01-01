@@ -20,6 +20,7 @@ const containerStyles = {
     pb: 1,
     display: "flex",
     flexDirection: "column",
+    flex: 1,
 };
 
 const headerStyles = {
@@ -34,21 +35,23 @@ const dataStyles = {
     overflowY: "auto",
     gap: 4,
     "&::-webkit-scrollbar": { display: "none" },
+    maxWidth: "100%",
 };
 
 const upperDataStyles = {
     gap: "inherit",
 };
 
-const columnDataLeft = { gap: 4, display: "flex", flex: 1 };
+const columnDataLeft = { gap: 4, display: "flex", flex: 1, maxWidth: "50%" };
 
-const columnDataRight = { gap: 4, display: "flex", flex: 2 };
+const columnDataRight = { gap: 4, display: "flex", flex: 1, maxWidth: "50%" };
 
 const extraCaresListStyles = {
     border: 1,
     borderColor: "grey.400",
     bgcolor: "listItemBg.main",
     borderRadius: 1,
+    maxWidth: "100%",
 };
 
 const cuidadoExtraStyles = { whiteSpace: "pre-wrap" };
@@ -63,7 +66,9 @@ const CaballoDetails = ({ caballo }) => {
             <Typography variant="caption">
                 {messages.DETAIL_CABALLO_ID}
             </Typography>
-            <Typography variant="body">{caballo.identificacion}</Typography>
+            <Typography variant="body">
+                {caballo.identificacion}
+            </Typography>
         </Stack>
     );
 
@@ -94,7 +99,9 @@ const CaballoDetails = ({ caballo }) => {
             <Typography variant="caption">
                 {messages.DETAIL_CABALLO_SPACE}
             </Typography>
-            <Typography variant="body">{caballo.espacio.nombre}</Typography>
+            <Typography variant="body">
+                {caballo.espacio.nombre} - {caballo.espacio.tipo}
+            </Typography>
         </Stack>
     );
 

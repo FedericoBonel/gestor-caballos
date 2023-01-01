@@ -18,7 +18,11 @@ import { Link } from "react-router-dom";
 import { messages } from "../../assets/messages";
 import { routes } from "../../routes";
 
-const listItemStyles = { bgcolor: "listItemBg.main", td: { border: "none" } };
+const listItemStyles = {
+    bgcolor: "listItemBg.main",
+    td: { border: "none" },
+    maxWidth: "100%",
+};
 
 const listItemLeftCellStyles = {
     borderTopLeftRadius: 8,

@@ -53,6 +53,13 @@ const theme = createTheme({
                 },
             },
         },
+        MuiTypography: {
+            styleOverrides: {
+                root: {
+                    wordWrap: "break-word",
+                },
+            },
+        },
     },
 });
 
